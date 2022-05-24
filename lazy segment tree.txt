@@ -1,0 +1,81 @@
+#define mxx 200010
+ll arr[mxx];
+struct info {
+    ll prop, sum;
+} tr[mxx * 4];
+
+
+void init(int node, int b, int e)
+{
+    if (b == e) {
+        tr[node].sum = arr[b];
+        return;
+    }
+    int Left = node * 2;
+    int Right = node * 2 + 1;
+    int mid = (b + e) / 2;
+    init(Left, b, mid);
+    init(Right, mid + 1, e);
+    tr[node].sum = tr[Left].sum + tr[Right].sum;
+    tr[node].prop=0;
+}
+
+void update(int node, int b, int e, int i, int j, ll x)
+{
+    if (i > e || j < b)
+        return;
+    if (b >= i && e <= j)
+    {
+        tr[node].sum = ((e - b + 1) * x);
+        tr[node].prop = x;
+        return;
+    }
+    int Left = node * 2;
+    int Right = (node * 2) + 1;
+    int mid = (b + e) / 2;
+    if(tr[node].prop!=0)
+    {
+        tr[Left].sum=(mid-b+1)*tr[node].prop;
+        tr[Left].prop=tr[node].prop;
+
+        tr[Right].sum=(e-mid)*tr[node].prop;
+        tr[Right].prop=tr[node].prop;
+        tr[node].prop=0;
+    }
+    update(Left, b, mid, i, j, x);
+    update(Right, mid + 1, e, i, j, x);
+    tr[node].sum = tr[Left].sum + tr[Right].sum;
+}
+
+ll query(int node, int b, int e, int i, int j)
+{
+    if (i > e || j < b)
+        return 0;
+
+    if (b >= i and e <= j)
+        return tr[node].sum;
+
+    int Left = node*2;
+    int Right = Left+1;
+    int mid = (b + e)/2;
+    if(tr[node].prop!=0)
+    {
+        tr[Left].sum=(mid-b+1)*tr[node].prop;
+        tr[Left].prop=tr[node].prop;
+
+        tr[Right].sum=(e-mid)*tr[node].prop;
+        tr[Right].prop=tr[node].prop;
+        tr[node].prop=0;
+    }
+    ll p1 = query(Left, b, mid, i, j);
+    ll p2 = query(Right, mid + 1, e, i, j);
+
+    return p1 + p2;
+}
+
+
+//init(1,1,n);
+//update(1, 1, n, l, r, y);
+//query(1, 1, n, l, r);
+
+
