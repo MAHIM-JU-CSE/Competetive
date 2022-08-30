@@ -1,0 +1,31 @@
+ll fact[N];
+void PreCal()
+{
+    fact[0]=1;
+    for(int i=1; i<N; i++)fact[i]=(fact[i-1]*i)%mod;
+}
+
+long long BigMod(long long val,long long pow)
+{
+    long long res = 1;
+    val = val % mod;
+    while(pow > 0)
+    {
+        if(pow & 1)res = (res*val) % mod;
+        pow = pow >> 1;
+        val = (val*val) % mod;
+    }
+    return res;
+}
+
+long long ncr(int n,int r)
+{
+    if(r > n)return 0;
+    return (fact[n]*BigMod(fact[r]*fact[n-r],mod-2))%mod;
+}
+
+long long npr(int n,int r)
+{
+    if(r > n)return 0;
+    return (fact[n]*BigMod(fact[n-r],mod-2))%mod;
+}
