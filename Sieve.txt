@@ -1,0 +1,17 @@
+ll sieve(ll n)
+{
+    bool check[n + 1];
+    memset(check, true, sizeof(check));
+    ll ans=0;
+    for (ll i = 2; i * i <= n; i++)if (check[i] == true)
+            for (ll j = i * i; j <= n; j += i)
+                check[j] = false;
+    for (ll i = 2; i <= n; i++)
+    {
+        if (check[i] == true)
+        {
+            ans++;
+        }
+    }
+    return ans;
+}
