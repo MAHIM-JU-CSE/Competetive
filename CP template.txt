@@ -1,0 +1,55 @@
+/**
+ *   Author  : Mahim
+ *   Created : 05.07.2022
+**/
+#pragma GCC optimize("Ofast")
+#include <bits/stdc++.h>
+#include<ext/pb_ds/tree_policy.hpp>
+#include<ext/pb_ds/assoc_container.hpp>
+
+using namespace std;
+using namespace __gnu_pbds;
+
+#define ll long long
+#define MAX 1e18
+#define MIN -1e18
+#define pb push_back
+#define vi vector<ll>
+#define pii pair<ll,ll>
+#define endl "\n"
+#define LCM(a, b) a *b / __gcd(a, b)
+#define GCD(a, b) __gcd(a, b)
+#define Sort(name) sort(name.begin(), name.end())
+#define sorT(name) sort(name.rbegin(), name.rend())
+#define Reverse(name) reverse(name.begin(), name.end())
+#define FASTIO ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+
+const long long mod=1e9+7;
+const double pi=acos(-1.0);
+const long long M=3e5+5;
+const long long N=2e6+5;
+
+template<typename temp>using ordered_set = tree<temp, null_type, less_equal<temp>, rb_tree_tag, tree_order_statistics_node_update>;
+
+
+//Corner case or overflow?
+
+
+void solve()
+{
+
+}
+
+
+int main()
+{
+    FASTIO;
+    ll t=1;
+    cin >> t;
+    for(int i=1; i<=t; i++)
+    {
+        //cout<<"Case #"<<i<<": ";
+        solve();
+    }
+    return 0;
+}
