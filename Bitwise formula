@@ -1,0 +1,6 @@
+//a+b=a^b+2a&b;
+//a^b=a|b-a&b;
+//a+b=a|b+a&b
+//a^b>=|a-b|;
+//if a|b=c then a|c=c and b|c=c divides
+//if a^b=c then a^c=b and b^c=a
