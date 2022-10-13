@@ -1,0 +1,3 @@
+bool checkBit(ll n, ll i){ return (n&(1LL<<i)); }
+ll setBit(ll n, ll i){ return (n|(1LL<<i)); }
+ll resetBit(ll n, ll i){ return (n&(~(1LL<<i))); }
