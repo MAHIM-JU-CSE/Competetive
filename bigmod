@@ -1,0 +1,28 @@
+long long sqsum(long long n)
+{
+    long long ans = n;
+    ans = (ans * (n+1))%mod;
+    ans = (ans *(2*n+1)%mod)%mod;
+    ans = (ans *POW(6LL, mod-2, mod))%mod;
+    return ans;
+}
+long long nsum(long longn)
+{
+
+    long long ans = (n*(n+1))/2;
+    ans%=mod;
+    return ans;
+}
+
+long long BigMod(long long val,long long pow)
+{
+    long long res = 1;
+    val = val % mod;
+    while(pow > 0)
+    {
+        if(pow & 1)res = (res*val) % mod;
+        pow = pow >> 1;
+        val = (val*val) % mod;
+    }
+    return res;
+}
