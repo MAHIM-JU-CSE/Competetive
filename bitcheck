@@ -1,3 +1,29 @@
 bool checkBit(ll n, ll i){ return (n&(1LL<<i)); }
 ll setBit(ll n, ll i){ return (n|(1LL<<i)); }
 ll resetBit(ll n, ll i){ return (n&(~(1LL<<i))); }
+
+
+
+//and of a range
+ll count_off(ll n, int k)   // count of numbers <= n having kth bit off
+{
+    if (n < 0) return 0;
+    ll batch = 1LL << (k + 1);
+    ll cnt = ((n + 1) / batch) * (batch >> 1);
+    n -= batch * ((n + 1) / batch);
+    cnt += min(n + 1, batch >> 1);
+    return cnt;
+}
+
+ll ask(ll l, ll r)
+{
+    ll ans = 0;
+    for (int k = 0; k <= 61; k++)
+    {
+        if (count_off(r, k) - count_off(l - 1, k) == 0)
+        {
+            ans |= 1LL << k;
+        }
+    }
+    return ans;
+}
