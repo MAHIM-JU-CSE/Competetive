@@ -1,0 +1,29 @@
+ll spf[M];
+
+void sieve()
+{
+    spf[1] = 1;
+    for(ll i = 2 ; i<M ; ++i)
+    {
+        if(!spf[i])
+        {
+            spf[i] = i;
+            for(ll j=i*i ; j<M ; j+=i)
+            {
+                if(!spf[j]) spf[j] = i;
+            }
+        }
+    }
+}
+
+
+
+void solve()
+{
+    int n=16;
+    while(spf[n]>1)
+    {
+        cout<<spf[n]<<" ";
+        n/=spf[n];
+    }
+}
