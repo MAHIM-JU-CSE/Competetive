@@ -1,0 +1,86 @@
+#include<iostream>
+#include<algorithm>
+
+using namespace std;
+
+int tree[100005];
+int lazy[100005];
+
+void update(int node, int l, int r, int i, int j, int val)
+{
+    if(lazy[node]!=0)
+    {
+        tree[node]+=(r-l+1)*lazy[node];
+        if(l!=r)
+        {
+            lazy[2*node]+=lazy[node];
+            lazy[2*node+1]+=lazy[node];
+        }
+        lazy[node]=0;
+    }
+    if(r<i || l>j)
+    {
+        return;
+    }
+    if(l>=i && r<=j)
+    {
+        tree[node]+=(r-l+1)*val;
+        if(l!=r)
+        {
+            lazy[2*node]+=val;
+            lazy[2*node+1]+=val;
+        }
+        return;
+    }
+    int mid=l+(r-l)/2;
+    update(2*node,l,mid,i,j,val);
+    update(2*node+1,mid+1,r,i,j,val);
+    tree[node]=tree[2*node]+tree[2*node+1];
+}
+
+int query(int node, int l, int r, int i, int j)
+{
+    if(lazy[node]!=0)
+    {
+        tree[node]+=(r-l+1)*lazy[node];
+        if(l!=r)
+        {
+            lazy[2*node]+=lazy[node];
+            lazy[2*node+1]+=lazy[node];
+        }
+        lazy[node]=0;
+    }
+
+    if(r<i || l>j)
+    {
+        return 0;
+    }
+    if(l>=i && r<=j)
+    {
+        return tree[node];
+    }
+    int mid=l+(r-l)/2;
+    return query(2*node, l, mid, i, j)+query(2*node+1, mid+1,r,i,j);
+}
+
+
+
+
+
+int main()
+{
+    int n;
+    cin>>n;
+    for(int i=1;i<=n;i++)
+    {
+        update(1,1,n,i,i,i);
+    }
+
+    cout<<query(1,1,n,4,7)<<endl;
+
+    update(1,1,n,4,4,10);
+
+    cout<<query(1,1,n,4,7)<<endl;
+
+    return 0;
+}
