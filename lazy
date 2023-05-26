@@ -3,8 +3,8 @@
 
 using namespace std;
 
-int tree[100005];
-int lazy[100005];
+int tree[4*100005];
+int lazy[4*100005];
 
 void update(int node, int l, int r, int i, int j, int val)
 {
